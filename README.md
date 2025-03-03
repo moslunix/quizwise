@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QuizWise - AI驱动的问题生成系统
 
-## Getting Started
+## 项目简介
+QuizWise 是一个基于人工智能的问题生成系统，能够根据指定主题、难度和数量自动生成高质量的选择题。
 
-First, run the development server:
+## 主要功能
+- 自定义主题生成问题
+- 支持多个难度级别（简单、中等、困难）
+- 每个问题都包含详细解释
+- 现代化的用户界面
 
+## 技术栈
+- Next.js
+- TypeScript
+- Tailwind CSS
+- OpenAI API
+
+## 本地开发
+1. 克隆仓库
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [仓库地址]
+cd quizwise
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 安装依赖
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. 配置环境变量
+创建 .env.local 文件并添加以下配置：
+```
+CHATGLM_API_KEY=你的API密钥
+DEEPSEEK_API_KEY=你的API密钥
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. 启动开发服务器
+```bash
+npm run dev
+```
 
-## Learn More
+## 部署
+本项目使用 Vercel 进行部署。在 Vercel 上部署时，请确保设置以下环境变量：
+- CHATGLM_API_KEY
+- DEEPSEEK_API_KEY
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 许可证
+MIT License
