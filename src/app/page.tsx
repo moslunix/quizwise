@@ -7,8 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Question } from '@/lib/deepseek';
-import { QuestionGenerationParams } from '@/lib/deepseek';
 
 interface FormData {
   topic: string;
@@ -17,10 +15,7 @@ interface FormData {
 }
 
 export default function Home() {
-  const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(false);
-  const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
-  const [showExplanations, setShowExplanations] = useState<Record<string, boolean>>({});
 
   const form = useForm<FormData>({
     defaultValues: {
@@ -128,57 +123,6 @@ export default function Home() {
             </Form>
           </CardContent>
         </Card>
-
-        {questions.length > 0 && (
-          <div className="space-y-4">
-            {questions.map((question) => (
-              <Card key={question.id}>
-                <CardContent className="pt-6">
-                  <h3 className="font-semibold mb-4">{question.question}</h3>
-                  <div className="space-y-2">
-                    {question.options.map((option, index) => {
-                      const isAnswered = userAnswers[question.id] !== undefined;
-                      const isSelected = userAnswers[question.id] === option;
-                      const isCorrect = question.correctAnswer === option;
-                      
-                      return (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          className={`w-full justify-start ${isAnswered ? (isCorrect ? 'bg-green-100' : (isSelected ? 'bg-red-100' : '')) : ''}`}
-                          onClick={() => {
-                            if (!isAnswered) {
-                              setUserAnswers(prev => ({ ...prev, [question.id]: option }));
-                              setShowExplanations(prev => ({ ...prev, [question.id]: true }));
-                            }
-                          }}
-                          disabled={isAnswered}
-                        >
-                          {option}
-                        </Button>
-                      );
-                    })}
-                  </div>
-                  {showExplanations[question.id] && (
-                    <div className="mt-4">
-                      <p className={`text-sm ${userAnswers[question.id] === question.correctAnswer ? 'text-green-600' : 'text-red-600'}`}>
-                        {userAnswers[question.id] === question.correctAnswer ? '回答正确！' : '回答错误。'}
-                      </p>
-                      <p className="mt-2 text-sm text-gray-600">
-                        <span className="font-semibold">解释：</span>
-                        {question.explanation}
-                      </p>
-                    </div>
-                  )}
-                  <p className="mt-4 text-sm text-gray-600">
-                    <span className="font-semibold">解释：</span>
-                    {question.explanation}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
       </div>
     </main>
   );
